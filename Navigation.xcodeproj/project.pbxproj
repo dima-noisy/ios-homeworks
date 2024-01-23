@@ -14,6 +14,8 @@
 		646ADD072B5D075100A9BEBD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 646ADD052B5D075100A9BEBD /* LaunchScreen.storyboard */; };
 		646ADD0F2B5DCF3E00A9BEBD /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADD0E2B5DCF3E00A9BEBD /* FeedViewController.swift */; };
 		646ADD112B5DCF7600A9BEBD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADD102B5DCF7600A9BEBD /* ProfileViewController.swift */; };
+		646ADD132B5EE2FC00A9BEBD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADD122B5EE2FC00A9BEBD /* PostViewController.swift */; };
+		646ADD152B5F149C00A9BEBD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADD142B5F149C00A9BEBD /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		646ADD082B5D075100A9BEBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		646ADD0E2B5DCF3E00A9BEBD /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		646ADD102B5DCF7600A9BEBD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		646ADD122B5EE2FC00A9BEBD /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		646ADD142B5F149C00A9BEBD /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 				646ADD082B5D075100A9BEBD /* Info.plist */,
 				646ADD0E2B5DCF3E00A9BEBD /* FeedViewController.swift */,
 				646ADD102B5DCF7600A9BEBD /* ProfileViewController.swift */,
+				646ADD122B5EE2FC00A9BEBD /* PostViewController.swift */,
+				646ADD142B5F149C00A9BEBD /* InfoViewController.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -140,8 +146,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				646ADD132B5EE2FC00A9BEBD /* PostViewController.swift in Sources */,
 				646ADCFF2B5D075000A9BEBD /* ViewController.swift in Sources */,
 				646ADCFB2B5D075000A9BEBD /* AppDelegate.swift in Sources */,
+				646ADD152B5F149C00A9BEBD /* InfoViewController.swift in Sources */,
 				646ADD112B5DCF7600A9BEBD /* ProfileViewController.swift in Sources */,
 				646ADD0F2B5DCF3E00A9BEBD /* FeedViewController.swift in Sources */,
 				646ADCFD2B5D075000A9BEBD /* SceneDelegate.swift in Sources */,
@@ -288,6 +296,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 35Y4373V43;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -320,6 +329,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 35Y4373V43;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -13,12 +13,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         
-        let feedViewController = ViewController()
-        feedViewController.view.backgroundColor = .systemRed
-        
-        let profileViewController = ViewController()
-        profileViewController.view.backgroundColor = .systemGreen
-        
+        let feedViewController = FeedViewController()
+        let profileViewController = ProfileViewController()
         let tabBarController = UITabBarController()
         
         feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(named: "Surfing"), tag: 0)
@@ -36,4 +32,3 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
     }
 }
-

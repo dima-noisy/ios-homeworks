@@ -1,6 +1,6 @@
 import UIKit
 
-class FeedViewController: UIViewController, UIWindowSceneDelegate {
+class InfoViewController: UIViewController, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
@@ -25,7 +25,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
     private lazy var actionButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Open Post", for: .normal)
+        button.setTitle("Alert", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         
         return button
@@ -34,8 +34,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Feed"
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .systemGreen
         
         view.addSubview(actionButton)
         
@@ -56,10 +55,14 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         actionButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
     }
     
-    @objc func buttonPressed(_ sender: UIButton) {
-        let postViewController = PostViewController()
-        self.navigationController?.pushViewController(postViewController, animated: true)
+
+    
+    @objc func buttonPressed(_ sender: UIAlertController) {
+        let alert = UIAlertController(title: "Attention", message: "You have reached the final View", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Exit", comment: "Exit action"), style: UIAlertAction.Style.cancel, handler: { _ in NSLog("Exit.")
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel action"), style: UIAlertAction.Style.destructive, handler: { _ in NSLog("Cancel.")
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
 }
-
-public var post = Post(title: "New Post")
