@@ -2,26 +2,6 @@ import UIKit
 
 class InfoViewController: UIViewController, UIWindowSceneDelegate {
     
-    var window: UIWindow?
-    
-    func scene(
-        _ scene: UIScene,
-        willConnectTo session: UISceneSession,
-        options connectionOptions: UIScene.ConnectionOptions
-    ) {
-        guard let scene = (scene as? UIWindowScene) else { return }
-        
-        let window = UIWindow(windowScene: scene)
-        
-        let viewController = ViewController()
-        let navigationController = UINavigationController(rootViewController: viewController)
-        
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
-        
-        self.window = window
-    }
-    
     private lazy var actionButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -54,8 +34,6 @@ class InfoViewController: UIViewController, UIWindowSceneDelegate {
         
         actionButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
     }
-    
-
     
     @objc func buttonPressed(_ sender: UIAlertController) {
         let alert = UIAlertController(title: "Attention", message: "You have reached the final View", preferredStyle: .alert)
