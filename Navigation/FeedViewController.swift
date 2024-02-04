@@ -2,41 +2,65 @@ import UIKit
 
 class FeedViewController: UIViewController, UIWindowSceneDelegate {
 
-    private lazy var actionButton: UIButton = {
+    private lazy var btn1: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Open Post", for: .normal)
-        button.setTitleColor(.systemBlue, for: .normal)
+        button.backgroundColor = .systemBlue
+        
+        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
         
         return button
+    }()
+        
+    private lazy var btn2: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemRed
+        
+        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
+        
+        return button
+    }()
+        
+    private lazy var stackView: UIStackView = { [unowned self] in
+        let stackView = UIStackView()
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.clipsToBounds = true
+        
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 10.0
+            
+        stackView.addArrangedSubview(self.btn1)
+        stackView.addArrangedSubview(self.btn2)
+        
+        return stackView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Feed"
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .systemBackground
         
-        view.addSubview(actionButton)
+        view.addSubview(stackView)
         
         let safeAreaLayoutGuide = view.safeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            actionButton.leadingAnchor.constraint(
+            stackView.leadingAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.leadingAnchor,
                 constant: 20.0
             ),
-            actionButton.trailingAnchor.constraint(
+            stackView.trailingAnchor.constraint(
                 equalTo: safeAreaLayoutGuide.trailingAnchor,
                 constant: -20.0
             ),
-            actionButton.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-            actionButton.heightAnchor.constraint(equalToConstant: 44.0)
+            stackView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 210.0)
         ])
-        
-        actionButton.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
     }
     
-    @objc func buttonPressed(_ sender: UIButton) {
+    @objc func buttonPressed(_ sender: UIStackView) {
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
     }
