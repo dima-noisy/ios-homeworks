@@ -12,7 +12,7 @@ class PostViewController: UIViewController {
         super.viewDidLoad()
         
         title = post.title
-        view.backgroundColor = .systemGray
+        view.backgroundColor = .systemYellow
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(buttonPressed(_:)))
     }
     @objc func buttonPressed(_ sender: UIButton) {
