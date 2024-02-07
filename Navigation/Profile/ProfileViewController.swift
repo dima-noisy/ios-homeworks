@@ -12,7 +12,6 @@ class ProfileViewController: UIViewController {
         let view = UIButton()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBlue
-
         view.setTitle("Big Bottom Button", for: .normal)
 
         return view

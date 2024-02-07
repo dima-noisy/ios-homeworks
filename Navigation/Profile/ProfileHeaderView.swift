@@ -1,30 +1,14 @@
 import UIKit
 
-class RoundContainer: UIView {
-
-    var cornerRadius: CGFloat = 10.0 {
-        didSet {
-            layer.cornerRadius = cornerRadius
-        }
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        CGSize(
-            width: cornerRadius * 2,
-            height: cornerRadius * 2
-        )
-    }
-}
-
 class ProfileHeaderView: UIView {
     
-    private lazy var avatarImageView: RoundContainer! = {
-        let view = RoundContainer()
+    private lazy var avatarImageView: UIImageView = {
+        let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 50.0
+        //view.layer.cornerRadius = 50.0
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = 3
-        view.layer.contents = UIImage(named: "catPhoto")?.cgImage
+        view.image = UIImage(named: "catPhoto")
         view.layer.contentsGravity = .resizeAspect
         view.layer.masksToBounds = true
 
@@ -101,6 +85,10 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width / 2
+    }
  
     func setupConstraints() {
         let safeAreaGuide = self.safeAreaLayoutGuide
