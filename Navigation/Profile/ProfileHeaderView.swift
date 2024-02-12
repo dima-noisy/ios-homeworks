@@ -5,7 +5,7 @@ class ProfileHeaderView: UIView {
     private lazy var avatarImageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        //view.layer.cornerRadius = 50.0
+
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = 3
         view.image = UIImage(named: "catPhoto")
@@ -38,7 +38,7 @@ class ProfileHeaderView: UIView {
         return view
     }()
     
-    private lazy var statusTextField: UITextField = {
+    private lazy var statusTextField: UITextField = { [unowned self] in
         let view = UITextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
@@ -47,6 +47,13 @@ class ProfileHeaderView: UIView {
         view.layer.borderColor = UIColor.black.cgColor
         view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         view.textColor = .black
+        
+        view.keyboardType = UIKeyboardType.default
+        view.returnKeyType = UIReturnKeyType.done
+        view.clearButtonMode = UITextField.ViewMode.whileEditing
+        view.contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
+        
+        view.delegate = self
         
         return view
     }()
@@ -127,5 +134,16 @@ class ProfileHeaderView: UIView {
             action: #selector(buttonPressed)
         )
         setStatusButton.addGestureRecognizer(tapRoot)
+    }
+}
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(
+        _ textField: UITextField
+    ) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
     }
 }
