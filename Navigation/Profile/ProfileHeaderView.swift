@@ -47,6 +47,7 @@ class ProfileHeaderView: UIView {
         view.layer.borderColor = UIColor.black.cgColor
         view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         view.textColor = .black
+        view.placeholder = "   Set your status..."
         
         view.keyboardType = UIKeyboardType.default
         view.returnKeyType = UIReturnKeyType.done

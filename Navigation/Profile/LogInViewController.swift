@@ -28,7 +28,7 @@ class LogInViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "VKLogo")
         view.layer.masksToBounds = true
-
+        
         return view
     }()
     
@@ -97,7 +97,7 @@ class LogInViewController: UIViewController {
         stackView.layer.borderColor = UIColor.lightGray.cgColor
         stackView.layer.borderWidth = 0.5
         stackView.layer.cornerRadius = 10.0
-            
+        
         stackView.addArrangedSubview(self.textField1)
         stackView.addArrangedSubview(self.textField2)
         
@@ -105,7 +105,7 @@ class LogInViewController: UIViewController {
     }()
     
     private lazy var logInButton: UIButton = {
-        let button = UIButton()
+        var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.setTitle("Log In", for: .normal)
@@ -114,12 +114,10 @@ class LogInViewController: UIViewController {
         button.clipsToBounds = true
         
         button.setBackgroundImage(UIImage(named: "bluePixel"), for: .normal)
-        button.setBackgroundImage(UIImage(named: "bluePixel"), for: .selected)
-        button.setBackgroundImage(UIImage(named: "bluePixel"), for: .highlighted)
-        button.setBackgroundImage(UIImage(named: "bluePixel"), for: .disabled)
-
+        
         button.addTarget(self, action: #selector(logInButtonPressed(_:)), for: .touchUpInside)
-
+            
+        
         return button
     }()
     
@@ -130,6 +128,7 @@ class LogInViewController: UIViewController {
         addSubviews()
         setupConstraints()
         setupActions()
+        changeButtonState()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -145,7 +144,7 @@ class LogInViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
         removeKeyboardObservers()
     }
-
+    
     @objc func willShowKeyboard(_ notification: NSNotification) {
         let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
         scrollView.contentInset.bottom += keyboardHeight ?? 0.0
@@ -154,7 +153,7 @@ class LogInViewController: UIViewController {
     @objc func willHideKeyboard(_ notification: NSNotification) {
         scrollView.contentInset.bottom = 0.0
     }
-     
+    
     private func setupView() {
         view.backgroundColor = .systemBackground
         
@@ -177,32 +176,24 @@ class LogInViewController: UIViewController {
             scrollView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 16.0),
-            scrollView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
+            scrollView.bottomAnchor.constraint(equalTo: safeAreaGuide.bottomAnchor),
+            
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-        ])
-        
-        NSLayoutConstraint.activate([
+            
             vkLogoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             vkLogoImageView.widthAnchor.constraint(equalToConstant: 100.0),
             vkLogoImageView.heightAnchor.constraint(equalToConstant: 100.0),
-            vkLogoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120.0)
-        ])
-        
-        NSLayoutConstraint.activate([
+            vkLogoImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120.0),
+            
             stackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
             stackView.heightAnchor.constraint(equalToConstant: 100.0),
-            stackView.topAnchor.constraint(equalTo: vkLogoImageView.bottomAnchor, constant: 120.0)
-        ])
-        
-        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: vkLogoImageView.bottomAnchor, constant: 120.0),
+            
             logInButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             logInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16.0),
             logInButton.heightAnchor.constraint(equalToConstant: 50.0),
@@ -214,7 +205,7 @@ class LogInViewController: UIViewController {
         let profileViewController = ProfileViewController()
         self.navigationController?.pushViewController(profileViewController, animated: true)
     }
-
+    
     private func setupActions() {
         let tapRoot = UITapGestureRecognizer(
             target: self,
@@ -222,7 +213,22 @@ class LogInViewController: UIViewController {
         )
         logInButton.addGestureRecognizer(tapRoot)
     }
-
+    
+    private func changeButtonState() {
+        switch logInButton.state {
+        case .normal:
+            logInButton.alpha = 1.0
+        case .highlighted:
+            logInButton.alpha = 0.8
+        case .selected:
+            logInButton.alpha = 0.8
+        case .disabled:
+            logInButton.alpha = 0.8
+        default:
+            logInButton.alpha = 1.0
+        }
+    }
+    
     private func setupKeyboardObservers() {
         let notificationCenter = NotificationCenter.default
         
@@ -245,6 +251,7 @@ class LogInViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
+    
 }
 
 extension LogInViewController: UITextFieldDelegate {

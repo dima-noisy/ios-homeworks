@@ -22,6 +22,9 @@ class ProfileViewController: UIViewController {
         
         title = "Profile"
         view.backgroundColor = .lightGray
+        
+        self.navigationItem.setHidesBackButton(true, animated: true)
+        
         setupUI()
         addBottomButton()
     }
