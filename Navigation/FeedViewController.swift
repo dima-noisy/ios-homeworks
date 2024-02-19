@@ -66,4 +66,4 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
     }
 }
 
-public var post = PostPage(title: "New Post")
+public var newPost = PostPage(title: "New Post")
