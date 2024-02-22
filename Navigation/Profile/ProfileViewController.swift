@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController {
     ]
     
     private lazy var tableView: UITableView = {
-        let tableView = UITableView()
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         return tableView
@@ -74,8 +74,7 @@ class ProfileViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50.0
         
-        let headerView = ProfileHeaderView()
-        tableView.setAndLayout(headerView: headerView)
+        
         tableView.tableFooterView = UIView()
         
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
@@ -84,22 +83,20 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
     }
     
-}
-
-extension UITableView {
-    
-    func setAndLayout(headerView: UIView) {
-        tableHeaderView = headerView
-        headerView.translatesAutoresizingMaskIntoConstraints = false
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        NSLayoutConstraint.activate([
-            headerView.widthAnchor.constraint(equalTo: widthAnchor)
-        ])
+        var headerView = UIView()
+        if section == 0 {
+            headerView = ProfileHeaderView()
+        }
         
-        headerView.setNeedsLayout()
-        headerView.layoutIfNeeded()
-        headerView.frame.size = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        return headerView
     }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 240
+    }
+    
 }
 
 extension ProfileViewController: UITableViewDataSource {
