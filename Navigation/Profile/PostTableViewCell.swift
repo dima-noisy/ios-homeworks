@@ -65,13 +65,7 @@ class PostTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        photoView.frame.size.height = photoView.frame.size.width
-    }
-    
+ 
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -108,6 +102,7 @@ class PostTableViewCell: UITableViewCell {
             photoView.leadingAnchor.constraint(equalTo: leadingAnchor),
             photoView.trailingAnchor.constraint(equalTo: trailingAnchor),
             photoView.topAnchor.constraint(equalTo: labelView.bottomAnchor, constant: 12.0),
+            photoView.heightAnchor.constraint(equalTo: photoView.widthAnchor),
             
             textView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16.0),
             textView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16.0),

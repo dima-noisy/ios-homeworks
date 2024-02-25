@@ -25,6 +25,7 @@ class ProfileViewController: UIViewController {
     }()
 
     private enum CellReuseID: String {
+        case photos = "PhotosTableViewCell_ReuseID"
         case base = "PostTableViewCell_ReuseID"
     }
     
@@ -73,9 +74,6 @@ class ProfileViewController: UIViewController {
         tableView.backgroundColor = .white
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50.0
-        
-        
-        tableView.tableFooterView = UIView()
         
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
         
