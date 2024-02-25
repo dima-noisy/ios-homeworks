@@ -74,9 +74,6 @@ class ProfileViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50.0
         
-        
-        tableView.tableFooterView = UIView()
-        
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.id)
         
         tableView.dataSource = self
