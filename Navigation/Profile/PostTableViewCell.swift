@@ -2,8 +2,6 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
-    static let id = "PostTableViewCell"
-    
     private lazy var labelView: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -95,9 +93,9 @@ class PostTableViewCell: UITableViewCell {
         let safeAreaGuide = self.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            labelView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16.0),
-            labelView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16.0),
-            labelView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 16.0),
+            labelView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16.0),
+            labelView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16.0),
+            labelView.topAnchor.constraint(equalTo: topAnchor, constant: 16.0),
             
             photoView.leadingAnchor.constraint(equalTo: leadingAnchor),
             photoView.trailingAnchor.constraint(equalTo: trailingAnchor),

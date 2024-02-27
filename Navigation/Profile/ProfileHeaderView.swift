@@ -126,6 +126,8 @@ class ProfileHeaderView: UIView {
     }
     
     @objc public func buttonPressed(_ sender: UIButton!) {
+        let statusNewText = statusTextField.text
+        statusLabel.text = statusNewText
         print(statusLabel.text!)
     }
 

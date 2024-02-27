@@ -2,8 +2,6 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
     
-    static let id = "PhotosTableViewCell"
-    
     private lazy var labelView: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -16,11 +14,23 @@ class PhotosTableViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var arrowView: UIImageView = {
+        let arrow = UIImageView()
+        arrow.translatesAutoresizingMaskIntoConstraints = false
+        arrow.contentMode = .scaleAspectFit
+        arrow.image = UIImage(named: "ArrowForward")
+        arrow.clipsToBounds = true
+        
+        return arrow
+    }()
+    
     private lazy var ph1View: UIImageView = {
         let photo = UIImageView()
         photo.translatesAutoresizingMaskIntoConstraints = false
-        photo.contentMode = .scaleAspectFit
-        photo.backgroundColor = .black
+        photo.image = UIImage(named: "ph1")
+        photo.contentMode = .scaleAspectFill
+        photo.layer.cornerRadius = 6
+        photo.clipsToBounds = true
         
         return photo
     }()
@@ -28,8 +38,10 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var ph2View: UIImageView = {
         let photo = UIImageView()
         photo.translatesAutoresizingMaskIntoConstraints = false
-        photo.contentMode = .scaleAspectFit
-        photo.backgroundColor = .black
+        photo.image = UIImage(named: "ph2")
+        photo.contentMode = .scaleAspectFill
+        photo.layer.cornerRadius = 6
+        photo.clipsToBounds = true
         
         return photo
     }()
@@ -37,8 +49,10 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var ph3View: UIImageView = {
         let photo = UIImageView()
         photo.translatesAutoresizingMaskIntoConstraints = false
-        photo.contentMode = .scaleAspectFit
-        photo.backgroundColor = .black
+        photo.image = UIImage(named: "ph3")
+        photo.contentMode = .scaleAspectFill
+        photo.layer.cornerRadius = 6
+        photo.clipsToBounds = true
         
         return photo
     }()
@@ -46,8 +60,10 @@ class PhotosTableViewCell: UITableViewCell {
     private lazy var ph4View: UIImageView = {
         let photo = UIImageView()
         photo.translatesAutoresizingMaskIntoConstraints = false
-        photo.contentMode = .scaleAspectFit
-        photo.backgroundColor = .black
+        photo.image = UIImage(named: "ph4")
+        photo.contentMode = .scaleAspectFill
+        photo.layer.cornerRadius = 6
+        photo.clipsToBounds = true
         
         return photo
     }()
@@ -56,7 +72,7 @@ class PhotosTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         addSubviews()
-        //setupConstraints()
+        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -70,17 +86,10 @@ class PhotosTableViewCell: UITableViewCell {
         isSelected = false
         isHighlighted = false
     }
-    /*
-     func configure(with post: Post) {
-     labelView.text = post.author
-     photoView.image = UIImage(named: post.image)
-     textView.text = post.description
-     likesView.text = "Likes: \(post.likes)"
-     viewsView.text = "Views: \(post.views)"
-     }
-     */
     
     private func addSubviews() {
+        addSubview(labelView)
+        addSubview(arrowView)
         addSubview(ph1View)
         addSubview(ph2View)
         addSubview(ph3View)
@@ -94,22 +103,32 @@ class PhotosTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             labelView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 12.0),
             labelView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 12.0),
-            /*
-             photoView.leadingAnchor.constraint(equalTo: leadingAnchor),
-             photoView.trailingAnchor.constraint(equalTo: trailingAnchor),
-             photoView.topAnchor.constraint(equalTo: labelView.bottomAnchor, constant: 12.0),
-             
-             textView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16.0),
-             textView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16.0),
-             textView.topAnchor.constraint(equalTo: photoView.bottomAnchor, constant: 16.0),
-             
-             likesView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16.0),
-             likesView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 16.0),
-             likesView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16.0),
-             
-             viewsView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16.0),
-             viewsView.topAnchor.constraint(equalTo: likesView.topAnchor)
-             */
+            
+            arrowView.centerYAnchor.constraint(equalTo: labelView.centerYAnchor),
+            arrowView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -12.0),
+            arrowView.widthAnchor.constraint(equalToConstant: 24.0),
+            arrowView.heightAnchor.constraint(equalTo: arrowView.widthAnchor),
+            
+            ph1View.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 12.0),
+            ph1View.topAnchor.constraint(equalTo: labelView.bottomAnchor, constant: 12.0),
+            ph1View.widthAnchor.constraint(equalTo: safeAreaGuide.widthAnchor, multiplier: 0.25, constant: -12.0),
+            ph1View.heightAnchor.constraint(equalTo: ph1View.widthAnchor),
+            ph1View.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12.0),
+            
+            ph2View.leadingAnchor.constraint(equalTo: ph1View.trailingAnchor, constant: 8.0),
+            ph2View.topAnchor.constraint(equalTo: ph1View.topAnchor),
+            ph2View.widthAnchor.constraint(equalTo: ph1View.widthAnchor),
+            ph2View.heightAnchor.constraint(equalTo: ph2View.widthAnchor),
+            
+            ph3View.leadingAnchor.constraint(equalTo: ph2View.trailingAnchor, constant: 8.0),
+            ph3View.topAnchor.constraint(equalTo: ph2View.topAnchor),
+            ph3View.widthAnchor.constraint(equalTo: ph2View.widthAnchor),
+            ph3View.heightAnchor.constraint(equalTo: ph3View.widthAnchor),
+            
+            ph4View.leadingAnchor.constraint(equalTo: ph3View.trailingAnchor, constant: 8.0),
+            ph4View.topAnchor.constraint(equalTo: ph3View.topAnchor),
+            ph4View.widthAnchor.constraint(equalTo: ph3View.widthAnchor),
+            ph4View.heightAnchor.constraint(equalTo: ph4View.widthAnchor)
         ])
     }
 }
