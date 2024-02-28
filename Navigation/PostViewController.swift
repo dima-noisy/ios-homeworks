@@ -11,7 +11,7 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = post.title
+        title = newPost.title
         view.backgroundColor = .systemYellow
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Info", style: .plain, target: self, action: #selector(buttonPressed(_:)))
     }
@@ -23,6 +23,6 @@ class PostViewController: UIViewController {
     }
 }
 
-public struct Post {
+public struct PostPage {
     var title: String
 }
