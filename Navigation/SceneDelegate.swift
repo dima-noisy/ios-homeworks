@@ -27,8 +27,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
         }
         
-        feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(named: "Surfing"), tag: 0)
-        logInViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(named: "Profile"), tag: 1)
+        feedViewController.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "figure.surfing"), tag: 0)
+        logInViewController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.fill"), tag: 1)
         
         let controllers = [feedViewController, logInViewController]
         tabBarController.viewControllers = controllers.map {
