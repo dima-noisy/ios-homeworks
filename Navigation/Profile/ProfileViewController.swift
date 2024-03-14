@@ -1,4 +1,5 @@
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
 
@@ -43,7 +44,11 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupView() {
+        #if DEBUG
         view.backgroundColor = .systemBackground
+        #else
+        view.backgroundColor = .systemPink
+        #endif
     }
     
     private func addSubviews() {
