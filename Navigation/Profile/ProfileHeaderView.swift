@@ -137,18 +137,21 @@ class ProfileHeaderView: UIView {
         
         statusLabel.snp.makeConstraints { (make) -> Void in
             make.leading.equalTo(fullNameLabel)
+            make.top.equalTo(84.0)
         }
         
         statusTextField.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(40.0)
             make.leading.equalTo(fullNameLabel)
             make.trailing.equalTo(-16.0)
+            make.top.equalTo(116.0)
         }
         
         setStatusButton.snp.makeConstraints { (make) -> Void in
             make.height.equalTo(50.0)
             make.leading.equalTo(16.0)
             make.trailing.equalTo(-16.0)
+            make.top.equalTo(172.0)
         }
         
         closeAnimationView.snp.makeConstraints { (make) -> Void in
@@ -181,17 +184,17 @@ class ProfileHeaderView: UIView {
             //fullNameLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 27.0),
             
             //statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            statusLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -16.0),
+            //statusLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -16.0),
             
             //statusTextField.heightAnchor.constraint(equalToConstant: 40.0),
             //statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
             //statusTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16.0),
-            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16.0),
+            //statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16.0),
             
             //setStatusButton.heightAnchor.constraint(equalToConstant: 50.0),
             //setStatusButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16.0),
             //setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16.0),
-            setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16.0),
+            //setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16.0),
             
             //closeAnimationView.heightAnchor.constraint(equalToConstant: 24.0),
             //closeAnimationView.widthAnchor.constraint(equalToConstant: 24.0),
