@@ -76,11 +76,15 @@ class PostTableViewCell: UITableViewCell {
     
     func configure(with post: Post) {
         labelView.text = post.author
-        photoView.image = UIImage(named: post.image) //.processImage(sourceImage: UIImage(named: post.image)!, filter: .colorInvert, completion: <#(UIImage?) -> Void#>)
+        photoView.image = UIImage(named: post.image)
         textView.text = post.description
         likesView.text = "Likes: \(post.likes)"
         viewsView.text = "Views: \(post.views)"
         
+        let imageProcessor = ImageProcessor()
+        imageProcessor.processImage(sourceImage: photoView.image!, filter: .noir) { filtered in
+            photoView.image = filtered
+        }
     }
     
     private func addSubviews() {
@@ -117,4 +121,5 @@ class PostTableViewCell: UITableViewCell {
             viewsView.topAnchor.constraint(equalTo: likesView.topAnchor)
         ])
     }
+    
 }

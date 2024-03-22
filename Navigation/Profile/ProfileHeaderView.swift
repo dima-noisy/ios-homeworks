@@ -175,29 +175,6 @@ class ProfileHeaderView: UIView {
         let safeAreaGuide = self.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            //avatarImageView.heightAnchor.constraint(equalToConstant: 100.0),
-            //avatarImageView.widthAnchor.constraint(equalToConstant: 100.0),
-            //avatarImageView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16.0),
-            //avatarImageView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 16.0),
-            
-            //fullNameLabel.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
-            //fullNameLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 27.0),
-            
-            //statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            //statusLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -16.0),
-            
-            //statusTextField.heightAnchor.constraint(equalToConstant: 40.0),
-            //statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            //statusTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16.0),
-            //statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16.0),
-            
-            //setStatusButton.heightAnchor.constraint(equalToConstant: 50.0),
-            //setStatusButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16.0),
-            //setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16.0),
-            //setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16.0),
-            
-            //closeAnimationView.heightAnchor.constraint(equalToConstant: 24.0),
-            //closeAnimationView.widthAnchor.constraint(equalToConstant: 24.0),
             closeAnimationView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -10.0),
             closeAnimationView.topAnchor.constraint(equalTo: avatarImageView.topAnchor, constant: 10.0)
         ])
