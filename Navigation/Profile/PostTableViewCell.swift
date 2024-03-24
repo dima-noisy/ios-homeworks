@@ -82,8 +82,8 @@ class PostTableViewCell: UITableViewCell {
         viewsView.text = "Views: \(post.views)"
         
         let imageProcessor = ImageProcessor()
-        imageProcessor.processImage(sourceImage: photoView.image!, filter: .noir) { filtered in
-            photoView.image = filtered
+        imageProcessor.processImage(sourceImage: photoView.image!, filter: .noir) {
+            photoView.image = $0
         }
     }
     
