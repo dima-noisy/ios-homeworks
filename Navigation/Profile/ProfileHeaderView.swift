@@ -1,4 +1,5 @@
 import UIKit
+import SnapKit
 
 class ProfileHeaderView: UIView {
     
@@ -122,6 +123,41 @@ class ProfileHeaderView: UIView {
         addSubview(halfOpacityView)
         addSubview(avatarImageView)
         avatarImageView.addSubview(closeAnimationView)
+        
+        avatarImageView.snp.makeConstraints { (make) -> Void in
+            make.width.height.equalTo(100.0)
+            make.leading.equalTo(16.0)
+            make.top.equalTo(16.0)
+        }
+        
+        fullNameLabel.snp.makeConstraints { (make) -> Void in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(27.0)
+        }
+        
+        statusLabel.snp.makeConstraints { (make) -> Void in
+            make.leading.equalTo(fullNameLabel)
+            make.top.equalTo(84.0)
+        }
+        
+        statusTextField.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(40.0)
+            make.leading.equalTo(fullNameLabel)
+            make.trailing.equalTo(-16.0)
+            make.top.equalTo(116.0)
+        }
+        
+        setStatusButton.snp.makeConstraints { (make) -> Void in
+            make.height.equalTo(50.0)
+            make.leading.equalTo(16.0)
+            make.trailing.equalTo(-16.0)
+            make.top.equalTo(172.0)
+        }
+        
+        closeAnimationView.snp.makeConstraints { (make) -> Void in
+            make.width.height.equalTo(24.0)
+        }
+        
         setupConstraints()
         setupActions()
     }
@@ -139,29 +175,6 @@ class ProfileHeaderView: UIView {
         let safeAreaGuide = self.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
-            avatarImageView.heightAnchor.constraint(equalToConstant: 100.0),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 100.0),
-            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16.0),
-            avatarImageView.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 16.0),
-            
-            fullNameLabel.centerXAnchor.constraint(equalTo: safeAreaGuide.centerXAnchor),
-            fullNameLabel.topAnchor.constraint(equalTo: safeAreaGuide.topAnchor, constant: 27.0),
-            
-            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            statusLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -16.0),
-            
-            statusTextField.heightAnchor.constraint(equalToConstant: 40.0),
-            statusTextField.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
-            statusTextField.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16.0),
-            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 16.0),
-            
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50.0),
-            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaGuide.leadingAnchor, constant: 16.0),
-            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -16.0),
-            setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 16.0),
-            
-            closeAnimationView.heightAnchor.constraint(equalToConstant: 24.0),
-            closeAnimationView.widthAnchor.constraint(equalToConstant: 24.0),
             closeAnimationView.trailingAnchor.constraint(equalTo: safeAreaGuide.trailingAnchor, constant: -10.0),
             closeAnimationView.topAnchor.constraint(equalTo: avatarImageView.topAnchor, constant: 10.0)
         ])
@@ -195,7 +208,6 @@ class ProfileHeaderView: UIView {
         CATransaction.begin()
         
         CATransaction.setCompletionBlock { [self] in
-            print("Did finish first CAAnimation example")
             self.avatarImageView.layer.frame.size.width = layer.frame.width
             self.avatarImageView.layer.frame.size.height = layer.frame.width
             self.avatarImageView.layer.cornerRadius = 0.0
@@ -248,10 +260,6 @@ class ProfileHeaderView: UIView {
         
         CATransaction.begin()
         
-        CATransaction.setCompletionBlock { [self] in
-            print("Did finish second CAAnimation example")
-        }
-        
         let animationCross = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
         animationCross.fromValue = 0.0
         animationCross.toValue = 1.0
@@ -273,7 +281,6 @@ class ProfileHeaderView: UIView {
         CATransaction.begin()
         
         CATransaction.setCompletionBlock { [self] in
-            print("Did close CAAnimation example")
             self.avatarImageView.layer.frame.size.width = 100
             self.avatarImageView.layer.frame.size.height = 100
             self.avatarImageView.layer.cornerRadius = 50.0
