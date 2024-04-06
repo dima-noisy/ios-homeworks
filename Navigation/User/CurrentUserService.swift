@@ -16,7 +16,7 @@ public class CurrentUserService: UserService {
         return user
     }
     
-    init(user: User) {
+    public init(user: User) {
         self.user = user
     }
     

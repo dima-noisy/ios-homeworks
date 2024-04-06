@@ -202,6 +202,7 @@ class LogInViewController: UIViewController {
     }
     
     @objc public func logInButtonPressed(_ sender: UIButton!) {
+        #if DEBUG
         if textField1.text == CurrentUserService(user: ProfileViewController().catUser).user.usersLogin {
             let profileViewController = ProfileViewController()
             self.navigationController?.pushViewController(profileViewController, animated: true)
@@ -211,6 +212,17 @@ class LogInViewController: UIViewController {
             }))
             self.present(alert, animated: true, completion: nil)
         }
+        #else
+        if textField1.text == TestUserService(user: ProfileViewController().catUser).user.usersLogin {
+            let profileViewController = ProfileViewController()
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Invalid Login Name", message: "If you forget your login name, please find it in code", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Exit action"), style: UIAlertAction.Style.cancel, handler: { _ in NSLog("Try Again.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        #endif
     }
     
     private func setupActions() {

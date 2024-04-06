@@ -9,8 +9,7 @@ class ProfileHeaderView: UIView {
 
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = 3
-        //view.image = ProfileViewController().catUser.avatarImage
-        view.image = CurrentUserService(user: ProfileViewController().catUser).user.avatarImage
+        view.image = ProfileViewController().catUser.avatarImage
         view.layer.contentsGravity = .resizeAspect
         view.layer.masksToBounds = true
         
@@ -27,8 +26,7 @@ class ProfileHeaderView: UIView {
     public lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        //label.text = ProfileViewController().catUser.fullName
-        label.text = CurrentUserService(user: ProfileViewController().catUser).user.fullName
+        label.text = ProfileViewController().catUser.fullName
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textAlignment = .center
@@ -40,8 +38,7 @@ class ProfileHeaderView: UIView {
     public lazy var statusLabel: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        //view.text = ProfileViewController().catUser.status
-        view.text = CurrentUserService(user: ProfileViewController().catUser).user.status
+        view.text = ProfileViewController().catUser.status
         view.textColor = .gray
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         view.layer.masksToBounds = false
