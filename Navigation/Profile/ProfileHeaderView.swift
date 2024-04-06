@@ -2,14 +2,15 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    private lazy var avatarImageView: UIImageView = {
+    public lazy var avatarImageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
 
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = 3
-        view.image = UIImage(named: "catPhoto")
+        //view.image = ProfileViewController().catUser.avatarImage
+        view.image = CurrentUserService(user: ProfileViewController().catUser).user.avatarImage
         view.layer.contentsGravity = .resizeAspect
         view.layer.masksToBounds = true
         
@@ -23,10 +24,11 @@ class ProfileHeaderView: UIView {
         return view
     }()
 
-    private lazy var fullNameLabel: UILabel = {
+    public lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "mr. Black Cat"
+        //label.text = ProfileViewController().catUser.fullName
+        label.text = CurrentUserService(user: ProfileViewController().catUser).user.fullName
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textAlignment = .center
@@ -35,10 +37,11 @@ class ProfileHeaderView: UIView {
         return label
     }()
 
-    private lazy var statusLabel: UILabel = {
+    public lazy var statusLabel: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Enjoys the silence"
+        //view.text = ProfileViewController().catUser.status
+        view.text = CurrentUserService(user: ProfileViewController().catUser).user.status
         view.textColor = .gray
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         view.layer.masksToBounds = false
@@ -195,7 +198,6 @@ class ProfileHeaderView: UIView {
         CATransaction.begin()
         
         CATransaction.setCompletionBlock { [self] in
-            print("Did finish first CAAnimation example")
             self.avatarImageView.layer.frame.size.width = layer.frame.width
             self.avatarImageView.layer.frame.size.height = layer.frame.width
             self.avatarImageView.layer.cornerRadius = 0.0
@@ -248,10 +250,6 @@ class ProfileHeaderView: UIView {
         
         CATransaction.begin()
         
-        CATransaction.setCompletionBlock { [self] in
-            print("Did finish second CAAnimation example")
-        }
-        
         let animationCross = CABasicAnimation(keyPath: #keyPath(CALayer.opacity))
         animationCross.fromValue = 0.0
         animationCross.toValue = 1.0
@@ -273,7 +271,6 @@ class ProfileHeaderView: UIView {
         CATransaction.begin()
         
         CATransaction.setCompletionBlock { [self] in
-            print("Did close CAAnimation example")
             self.avatarImageView.layer.frame.size.width = 100
             self.avatarImageView.layer.frame.size.height = 100
             self.avatarImageView.layer.cornerRadius = 50.0
