@@ -1,14 +1,9 @@
 import UIKit
 
-public class TestUserService: UserService {
+final class TestUserService: UserService {
     
-    let user: User
-    
-    func userAutorization(usersLogin: String) -> User? {
-        
-        return user
-    }
-    
+    var user: User
+
     public init(user: User) {
         self.user = user
     }

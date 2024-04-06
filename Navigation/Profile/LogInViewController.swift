@@ -203,26 +203,19 @@ class LogInViewController: UIViewController {
     
     @objc public func logInButtonPressed(_ sender: UIButton!) {
         #if DEBUG
-        if textField1.text == CurrentUserService(user: ProfileViewController().catUser).user.usersLogin {
-            let profileViewController = ProfileViewController()
-            self.navigationController?.pushViewController(profileViewController, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Invalid Login Name", message: "If you forget your login name, please find it in code", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Exit action"), style: UIAlertAction.Style.cancel, handler: { _ in NSLog("Try Again.")
-            }))
-            self.present(alert, animated: true, completion: nil)
-        }
+        let service = CurrentUserService(user: ProfileViewController().catUser)
         #else
-        if textField1.text == TestUserService(user: ProfileViewController().catUser).user.usersLogin {
+        let service = TestUserService(user: ProfileViewController().catUser)
+        #endif
+        if service.userAutorization(usersLogin: textField1.text ?? "") != nil {
             let profileViewController = ProfileViewController()
-            self.navigationController?.pushViewController(profileViewController, animated: true)
+            navigationController?.pushViewController(profileViewController, animated: true)
         } else {
             let alert = UIAlertController(title: "Invalid Login Name", message: "If you forget your login name, please find it in code", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Exit action"), style: UIAlertAction.Style.cancel, handler: { _ in NSLog("Try Again.")
             }))
             self.present(alert, animated: true, completion: nil)
         }
-        #endif
     }
     
     private func setupActions() {

@@ -4,7 +4,7 @@ import StorageService
 public class ProfileViewController: UIViewController {
     
     #if DEBUG
-    public let catUser = User(usersLogin: "BlackCat777", fullName: "mr. Black Cat", avatarImage: UIImage(named: "catPhoto")!, status: "Enjoys the silence")
+    public let catUser = User(usersLogin: "BlackCat", fullName: "mr. Black Cat", avatarImage: UIImage(named: "catPhoto")!, status: "Enjoys the silence")
     #else
     public let catUser = User(usersLogin: "TestLogin", fullName: "Test Name", avatarImage: UIImage(named: "AmurLeopard")!, status: "Testing...")
     #endif

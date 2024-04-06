@@ -1,23 +1,22 @@
 import UIKit
 
 protocol UserService {
+    var user: User { get set }
     func userAutorization(usersLogin: String) -> User?
 }
 
-public class CurrentUserService: UserService {
+final class CurrentUserService: UserService {
     
-    let user: User
-    
-    func userAutorization(usersLogin: String) -> User? {
-        
-        guard usersLogin == user.usersLogin else {
-            return nil
-        }
-        return user
-    }
-    
+    var user: User
+
     public init(user: User) {
         self.user = user
     }
     
+}
+
+extension UserService {
+    func userAutorization(usersLogin: String) -> User? {
+        return usersLogin == user.usersLogin ? user : nil
+    }
 }
