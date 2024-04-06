@@ -3,14 +3,14 @@ import SnapKit
 
 class ProfileHeaderView: UIView {
     
-    private lazy var avatarImageView: UIImageView = {
+    public lazy var avatarImageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
 
         view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = 3
-        view.image = UIImage(named: "catPhoto")
+        view.image = ProfileViewController().catUser.avatarImage
         view.layer.contentsGravity = .resizeAspect
         view.layer.masksToBounds = true
         
@@ -24,10 +24,10 @@ class ProfileHeaderView: UIView {
         return view
     }()
 
-    private lazy var fullNameLabel: UILabel = {
+    public lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "mr. Black Cat"
+        label.text = ProfileViewController().catUser.fullName
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.textAlignment = .center
@@ -36,10 +36,10 @@ class ProfileHeaderView: UIView {
         return label
     }()
 
-    private lazy var statusLabel: UILabel = {
+    public lazy var statusLabel: UILabel = {
         let view = UILabel()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Enjoys the silence"
+        view.text = ProfileViewController().catUser.status
         view.textColor = .gray
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         view.layer.masksToBounds = false

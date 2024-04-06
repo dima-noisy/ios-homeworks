@@ -202,8 +202,20 @@ class LogInViewController: UIViewController {
     }
     
     @objc public func logInButtonPressed(_ sender: UIButton!) {
-        let profileViewController = ProfileViewController()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+        #if DEBUG
+        let service = CurrentUserService(user: ProfileViewController().catUser)
+        #else
+        let service = TestUserService(user: ProfileViewController().catUser)
+        #endif
+        if service.userAutorization(usersLogin: textField1.text ?? "") != nil {
+            let profileViewController = ProfileViewController()
+            navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Invalid Login Name", message: "If you forget your login name, please find it in code", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Exit action"), style: UIAlertAction.Style.cancel, handler: { _ in NSLog("Try Again.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     private func setupActions() {
