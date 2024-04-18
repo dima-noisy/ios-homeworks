@@ -29,6 +29,7 @@
 		646ADD132B5EE2FC00A9BEBD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADD122B5EE2FC00A9BEBD /* PostViewController.swift */; };
 		646ADD152B5F149C00A9BEBD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADD142B5F149C00A9BEBD /* InfoViewController.swift */; };
 		64A507E52BC15A780009F457 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A507E42BC15A780009F457 /* TestUserService.swift */; };
+		64A507E72BCF8A9D0009F457 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A507E62BCF8A9D0009F457 /* Checker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		646ADD122B5EE2FC00A9BEBD /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		646ADD142B5F149C00A9BEBD /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		64A507E42BC15A780009F457 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+		64A507E62BCF8A9D0009F457 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				642AA3F92B8A277B00700255 /* PhotosTableViewCell.swift */,
 				642AA3FB2B8DB69200700255 /* PhotosViewController.swift */,
 				642AA3FD2B8DC9E300700255 /* PhotosCollectionViewCell.swift */,
+				64A507E62BCF8A9D0009F457 /* Checker.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				642AA3FE2B8DC9E300700255 /* PhotosCollectionViewCell.swift in Sources */,
 				646ADCFB2B5D075000A9BEBD /* AppDelegate.swift in Sources */,
 				640A82622BC093140021FE40 /* User.swift in Sources */,
+				64A507E72BCF8A9D0009F457 /* Checker.swift in Sources */,
 				646ADD152B5F149C00A9BEBD /* InfoViewController.swift in Sources */,
 				642AA3D42B825EE700700255 /* PostTableViewCell.swift in Sources */,
 				646ADD0F2B5DCF3E00A9BEBD /* FeedViewController.swift in Sources */,

@@ -1,6 +1,12 @@
 import UIKit
 
+protocol LoginViewControllerDelegate {
+    mutating func check(usersLogin: String, usersPassword: String) -> Bool
+}
+
 class LogInViewController: UIViewController {
+    
+    var loginDelegate: LoginViewControllerDelegate?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -32,7 +38,7 @@ class LogInViewController: UIViewController {
         return view
     }()
     
-    private lazy var textField1: UITextField = { [unowned self] in
+    public lazy var textField1: UITextField = { [unowned self] in
         let textField = UITextField()
         
         textField.backgroundColor = .systemGray6
@@ -58,7 +64,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
     
-    private lazy var textField2: UITextField = { [unowned self] in
+    public lazy var textField2: UITextField = { [unowned self] in
         let textField = UITextField()
         
         textField.backgroundColor = .systemGray6
@@ -207,11 +213,12 @@ class LogInViewController: UIViewController {
         #else
         let service = TestUserService(user: ProfileViewController().catUser)
         #endif
-        if service.userAutorization(usersLogin: textField1.text ?? "") != nil {
+        if loginDelegate?.check(usersLogin: textField1.text ?? "", usersPassword: textField2.text ?? "") != nil  {
+        //if service.userAutorization(usersLogin: textField1.text ?? "") != nil {
             let profileViewController = ProfileViewController()
             navigationController?.pushViewController(profileViewController, animated: true)
         } else {
-            let alert = UIAlertController(title: "Invalid Login Name", message: "If you forget your login name, please find it in code", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Invalid Login Name", message: "If you forget your login name or password, please find them in code", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Exit action"), style: UIAlertAction.Style.cancel, handler: { _ in NSLog("Try Again.")
             }))
             self.present(alert, animated: true, completion: nil)
@@ -273,6 +280,15 @@ extension LogInViewController: UITextFieldDelegate {
     ) -> Bool {
         textField.resignFirstResponder()
         
+        return true
+    }
+}
+
+struct LoginInspector: LoginViewControllerDelegate {
+    mutating func check(usersLogin: String, usersPassword: String) -> Bool {
+        guard LogInViewController().textField1.text == Checker.shared.login && LogInViewController().textField2.text == Checker.shared.password else {
+            return false
+        }
         return true
     }
 }
