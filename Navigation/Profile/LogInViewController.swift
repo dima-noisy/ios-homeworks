@@ -43,7 +43,7 @@ class LogInViewController: UIViewController {
         
         textField.backgroundColor = .systemGray6
         
-        textField.placeholder = "   Email of phone"
+        textField.placeholder = "   Login"
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = .black
         if #available(iOS 15.0, *) {
@@ -208,17 +208,17 @@ class LogInViewController: UIViewController {
     }
     
     @objc public func logInButtonPressed(_ sender: UIButton!) {
-        #if DEBUG
+    #if DEBUG
         let service = CurrentUserService(user: ProfileViewController().catUser)
-        #else
+    #else
         let service = TestUserService(user: ProfileViewController().catUser)
-        #endif
-        if loginDelegate?.check(usersLogin: textField1.text ?? "", usersPassword: textField2.text ?? "") != nil  {
-        //if service.userAutorization(usersLogin: textField1.text ?? "") != nil {
+    #endif
+        if (loginDelegate?.check(usersLogin: textField1.text ?? "", usersPassword: textField2.text ?? ""))! {
+            //if service.userAutorization(usersLogin: textField1.text ?? "") != nil {
             let profileViewController = ProfileViewController()
             navigationController?.pushViewController(profileViewController, animated: true)
         } else {
-            let alert = UIAlertController(title: "Invalid Login Name", message: "If you forget your login name or password, please find them in code", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Invalid Login or Password", message: "If you forget your login name or password, please find them in code", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Exit action"), style: UIAlertAction.Style.cancel, handler: { _ in NSLog("Try Again.")
             }))
             self.present(alert, animated: true, completion: nil)
@@ -286,10 +286,7 @@ extension LogInViewController: UITextFieldDelegate {
 
 struct LoginInspector: LoginViewControllerDelegate {
     mutating func check(usersLogin: String, usersPassword: String) -> Bool {
-        guard LogInViewController().textField1.text == Checker.shared.login && LogInViewController().textField2.text == Checker.shared.password else {
-            return false
-        }
-        return true
+        return usersLogin == Checker.shared.login && usersPassword == Checker.shared.password
     }
 }
 

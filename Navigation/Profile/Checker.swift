@@ -12,10 +12,7 @@ class Checker {
     let password: String = "12345"
     
     func check(usersLogin: String, usersPassword: String) -> Bool {
-        guard usersLogin == login && usersPassword == password else {
-            return false
-        }
-        return true
+        return usersLogin == login && usersPassword == password
     }
     
 }
