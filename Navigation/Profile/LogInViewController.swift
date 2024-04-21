@@ -46,6 +46,7 @@ class LogInViewController: UIViewController {
         textField.placeholder = "   Login"
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = .black
+        textField.text = "BlackCat" //default for automatic enter
         if #available(iOS 15.0, *) {
             textField.tintColor = .tintColor
         }
@@ -72,6 +73,7 @@ class LogInViewController: UIViewController {
         textField.placeholder = "   Password"
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = .black
+        textField.text = "12345" //default for automatic enter
         if #available(iOS 15.0, *) {
             textField.tintColor = .tintColor
         }
@@ -286,7 +288,7 @@ extension LogInViewController: UITextFieldDelegate {
 
 struct LoginInspector: LoginViewControllerDelegate {
     mutating func check(usersLogin: String, usersPassword: String) -> Bool {
-        return usersLogin == Checker.shared.login && usersPassword == Checker.shared.password
+        return Checker.shared.check(usersLogin: usersLogin, usersPassword: usersPassword)
     }
 }
 
