@@ -15,6 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let feedViewController = FeedViewController()
         let logInViewController = LogInViewController()
+        //logInViewController.loginDelegate = LoginInspector() решение для Задачи 1
+        logInViewController.loginDelegate = MyLoginFactory().makeLoginInspector() //решение для Задачи2
         let tabBarController = UITabBarController()
         
         let navigationBarAppearance = UINavigationBarAppearance()

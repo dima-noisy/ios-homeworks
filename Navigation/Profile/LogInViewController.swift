@@ -1,6 +1,12 @@
 import UIKit
 
+protocol LoginViewControllerDelegate {
+    mutating func check(usersLogin: String, usersPassword: String) -> Bool
+}
+
 class LogInViewController: UIViewController {
+    
+    var loginDelegate: LoginViewControllerDelegate?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -32,14 +38,15 @@ class LogInViewController: UIViewController {
         return view
     }()
     
-    private lazy var textField1: UITextField = { [unowned self] in
+    public lazy var textField1: UITextField = { [unowned self] in
         let textField = UITextField()
         
         textField.backgroundColor = .systemGray6
         
-        textField.placeholder = "   Email of phone"
+        textField.placeholder = "   Login"
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = .black
+        textField.text = "BlackCat" //default for automatic enter
         if #available(iOS 15.0, *) {
             textField.tintColor = .tintColor
         }
@@ -58,7 +65,7 @@ class LogInViewController: UIViewController {
         return textField
     }()
     
-    private lazy var textField2: UITextField = { [unowned self] in
+    public lazy var textField2: UITextField = { [unowned self] in
         let textField = UITextField()
         
         textField.backgroundColor = .systemGray6
@@ -66,6 +73,7 @@ class LogInViewController: UIViewController {
         textField.placeholder = "   Password"
         textField.font = UIFont.systemFont(ofSize: 16)
         textField.textColor = .black
+        textField.text = "12345" //default for automatic enter
         if #available(iOS 15.0, *) {
             textField.tintColor = .tintColor
         }
@@ -202,8 +210,21 @@ class LogInViewController: UIViewController {
     }
     
     @objc public func logInButtonPressed(_ sender: UIButton!) {
-        let profileViewController = ProfileViewController()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+    #if DEBUG
+        let service = CurrentUserService(user: ProfileViewController().catUser)
+    #else
+        let service = TestUserService(user: ProfileViewController().catUser)
+    #endif
+        if (loginDelegate?.check(usersLogin: textField1.text ?? "", usersPassword: textField2.text ?? ""))! {
+            //if service.userAutorization(usersLogin: textField1.text ?? "") != nil {
+            let profileViewController = ProfileViewController()
+            navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Invalid Login or Password", message: "If you forget your login name or password, please find them in code", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("Try Again", comment: "Exit action"), style: UIAlertAction.Style.cancel, handler: { _ in NSLog("Try Again.")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
     private func setupActions() {
@@ -262,6 +283,12 @@ extension LogInViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         return true
+    }
+}
+
+struct LoginInspector: LoginViewControllerDelegate {
+    mutating func check(usersLogin: String, usersPassword: String) -> Bool {
+        return Checker.shared.check(usersLogin: usersLogin, usersPassword: usersPassword)
     }
 }
 

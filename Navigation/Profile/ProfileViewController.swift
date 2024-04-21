@@ -1,7 +1,14 @@
 import UIKit
+import StorageService
 
-class ProfileViewController: UIViewController {
-
+public class ProfileViewController: UIViewController {
+    
+    #if DEBUG
+    public let catUser = User(usersLogin: "BlackCat", fullName: "mr. Black Cat", avatarImage: UIImage(named: "catPhoto")!, status: "Enjoys the silence")
+    #else
+    public let catUser = User(usersLogin: "TestLogin", fullName: "Test Name", avatarImage: UIImage(named: "AmurLeopard")!, status: "Testing...")
+    #endif
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -14,7 +21,7 @@ class ProfileViewController: UIViewController {
         case post = "PostTableViewCell_ReuseID"
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
@@ -23,7 +30,7 @@ class ProfileViewController: UIViewController {
         tuneTableView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -36,14 +43,18 @@ class ProfileViewController: UIViewController {
         }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     private func setupView() {
+        #if DEBUG
         view.backgroundColor = .systemBackground
+        #else
+        view.backgroundColor = .systemPink
+        #endif
     }
     
     private func addSubviews() {
@@ -74,7 +85,7 @@ class ProfileViewController: UIViewController {
         tableView.delegate = self
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         var headerView = UIView()
         if section == 0 {
@@ -84,7 +95,7 @@ class ProfileViewController: UIViewController {
         return headerView
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    public func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
             return 240
         } else {
@@ -95,13 +106,13 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource {
     
-    func numberOfSections(
+    public func numberOfSections(
         in tableView: UITableView
     ) -> Int {
         2
     }
     
-    func tableView(
+    public func tableView(
         _ tableView: UITableView,
         numberOfRowsInSection section: Int
     ) -> Int {
@@ -113,7 +124,7 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
         
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath ) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath ) -> UITableViewCell {
         
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(
@@ -142,7 +153,7 @@ extension ProfileViewController: UITableViewDataSource {
 
 extension ProfileViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             navigationController?.pushViewController(PhotosViewController(), animated: true)
         }
