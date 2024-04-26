@@ -1,8 +1,11 @@
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
     fileprivate lazy var photos: [String] = (1...20).map { String("ph\($0)") }
+    
+    let myFacade = ImagePublisherFacade()
     
     private lazy var collectionView: UICollectionView = {
         
@@ -24,6 +27,8 @@ class PhotosViewController: UIViewController {
         
         setupCollectionView()
         setupLayouts()
+        
+        //myFacade.addImagesWithTimer(time: 0.5, repeat: 22, userImages: (1...20).map { UIImage(named: "ph\($0)")! })
     }
     
     private func setupCollectionView() {
@@ -47,7 +52,6 @@ class PhotosViewController: UIViewController {
     
     private enum LayoutConstant {
         static let spacing: CGFloat = 8.0
-        //static let itemHeight: CGFloat = 40.0
     }
     
     private enum CellReuseID: String {
@@ -127,5 +131,10 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGFloat {
         LayoutConstant.spacing
     }
+}
 
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        myFacade.addImagesWithTimer(time: 0.5, repeat: 22, userImages: (1...20).map { UIImage(named: "ph\($0)")! })
+    }
 }
