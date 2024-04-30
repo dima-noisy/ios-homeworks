@@ -5,6 +5,8 @@ class PhotosViewController: UIViewController {
     
     fileprivate lazy var photos: [String] = (1...20).map { String("ph\($0)") }
     
+    lazy var arrayOfPhotos: [UIImage] = photos.map({ UIImage(named: $0)! })
+    
     let myFacade = ImagePublisherFacade()
     
     private lazy var collectionView: UICollectionView = {
@@ -28,7 +30,13 @@ class PhotosViewController: UIViewController {
         setupCollectionView()
         setupLayouts()
         
-        //myFacade.addImagesWithTimer(time: 0.5, repeat: 22, userImages: (1...20).map { UIImage(named: "ph\($0)")! })
+        receive(images: arrayOfPhotos)
+        
+        myFacade.addImagesWithTimer(time: 1.5, repeat: 22, userImages: arrayOfPhotos)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        //отмена подписки будет тут
     }
     
     private func setupCollectionView() {
@@ -61,7 +69,8 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photos.count
+        //photos.count
+        arrayOfPhotos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -69,7 +78,8 @@ extension PhotosViewController: UICollectionViewDataSource {
             withReuseIdentifier: CellReuseID.base.rawValue,
             for: indexPath) as! PhotosCollectionViewCell
         
-        let photo = photos[indexPath.row]
+        //let photo = photos[indexPath.row]
+        let photo = arrayOfPhotos[indexPath.row]
         cell.setup(with: photo)
         
         return cell
@@ -135,6 +145,9 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
 extension PhotosViewController: ImageLibrarySubscriber {
     func receive(images: [UIImage]) {
-        myFacade.addImagesWithTimer(time: 0.5, repeat: 22, userImages: (1...20).map { UIImage(named: "ph\($0)")! })
+        arrayOfPhotos += images
+        //for image in images {
+            //arrayOfPhotos.append(image)
+        //}
     }
 }

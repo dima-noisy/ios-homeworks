@@ -35,7 +35,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func setup(with photo: String) {
-        photoView.image = UIImage(named: photo)
+    func setup(with photo: UIImage) {
+        //photoView.image = UIImage(named: photo)
+        photoView.image = photo
     }
 }
