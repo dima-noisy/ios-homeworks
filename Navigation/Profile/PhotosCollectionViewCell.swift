@@ -36,7 +36,6 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }
     
     func setup(with photo: UIImage) {
-        //photoView.image = UIImage(named: photo)
         photoView.image = photo
     }
 }

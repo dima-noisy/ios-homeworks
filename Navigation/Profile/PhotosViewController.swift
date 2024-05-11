@@ -7,7 +7,7 @@ class PhotosViewController: UIViewController {
     
     lazy var arrayOfPhotos: [UIImage] = photos.map({ UIImage(named: $0)! })
     
-    let myFacade = ImagePublisherFacade()
+    let myPublisherFacade = ImagePublisherFacade()
     
     private lazy var collectionView: UICollectionView = {
         
@@ -30,13 +30,14 @@ class PhotosViewController: UIViewController {
         setupCollectionView()
         setupLayouts()
         
-        receive(images: arrayOfPhotos)
+        myPublisherFacade.subscribe(self)
+        myPublisherFacade.addImagesWithTimer(time: 1.5, repeat: arrayOfPhotos.count, userImages: arrayOfPhotos)
+        myPublisherFacade.rechargeImageLibrary()
         
-        myFacade.addImagesWithTimer(time: 1.5, repeat: 22, userImages: arrayOfPhotos)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        //отмена подписки будет тут
+        myPublisherFacade.removeSubscription(for: self)
     }
     
     private func setupCollectionView() {
@@ -145,9 +146,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 
 extension PhotosViewController: ImageLibrarySubscriber {
     func receive(images: [UIImage]) {
-        arrayOfPhotos += images
-        //for image in images {
-            //arrayOfPhotos.append(image)
-        //}
+        arrayOfPhotos = images
+        collectionView.reloadData()
     }
 }
