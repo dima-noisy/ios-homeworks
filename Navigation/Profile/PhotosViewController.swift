@@ -1,8 +1,13 @@
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
     fileprivate lazy var photos: [String] = (1...20).map { String("ph\($0)") }
+    
+    lazy var arrayOfPhotos: [UIImage] = photos.map({ UIImage(named: $0)! })
+    
+    let myPublisherFacade = ImagePublisherFacade()
     
     private lazy var collectionView: UICollectionView = {
         
@@ -24,6 +29,15 @@ class PhotosViewController: UIViewController {
         
         setupCollectionView()
         setupLayouts()
+        
+        myPublisherFacade.subscribe(self)
+        myPublisherFacade.addImagesWithTimer(time: 1.5, repeat: arrayOfPhotos.count, userImages: arrayOfPhotos)
+        myPublisherFacade.rechargeImageLibrary()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        myPublisherFacade.removeSubscription(for: self)
     }
     
     private func setupCollectionView() {
@@ -47,7 +61,6 @@ class PhotosViewController: UIViewController {
     
     private enum LayoutConstant {
         static let spacing: CGFloat = 8.0
-        //static let itemHeight: CGFloat = 40.0
     }
     
     private enum CellReuseID: String {
@@ -57,7 +70,8 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photos.count
+        //photos.count
+        arrayOfPhotos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -65,7 +79,8 @@ extension PhotosViewController: UICollectionViewDataSource {
             withReuseIdentifier: CellReuseID.base.rawValue,
             for: indexPath) as! PhotosCollectionViewCell
         
-        let photo = photos[indexPath.row]
+        //let photo = photos[indexPath.row]
+        let photo = arrayOfPhotos[indexPath.row]
         cell.setup(with: photo)
         
         return cell
@@ -127,5 +142,11 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGFloat {
         LayoutConstant.spacing
     }
+}
 
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        arrayOfPhotos = images
+        collectionView.reloadData()
+    }
 }
