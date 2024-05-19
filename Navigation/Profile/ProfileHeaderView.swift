@@ -20,7 +20,7 @@ class ProfileHeaderView: UIView {
         )
         tapAvatar.numberOfTapsRequired = 1
         view.addGestureRecognizer(tapAvatar)
-
+         
         return view
     }()
 
@@ -68,22 +68,21 @@ class ProfileHeaderView: UIView {
         return view
     }()
     
-    private lazy var setStatusButton: UIView = {
-        let view = UIButton()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBlue
+    public lazy var setStatusButton: CustomButton = {
+        let button = CustomButton(title: "Show status", titleColor: .white)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemBlue
 
-        view.layer.cornerRadius = 4.0
-        view.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.7
+        button.layer.cornerRadius = 4.0
+        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
 
-        view.clipsToBounds = false
+        button.clipsToBounds = false
 
-        view.setTitle("Show status", for: .normal)
-        view.addTarget(ProfileHeaderView.self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
+        button.setTitle("Show status", for: .normal)
 
-        return view
+        return button
     }()
     
     private lazy var closeAnimationView: UIImageView = {
@@ -159,7 +158,7 @@ class ProfileHeaderView: UIView {
         }
         
         setupConstraints()
-        setupActions()
+        createObservers()
     }
     
     required init?(coder: NSCoder) {
@@ -180,6 +179,10 @@ class ProfileHeaderView: UIView {
         ])
     }
     
+    func createObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(buttonPressed(notification:)), name: Notification.Name("StatusButtonCalling"), object: nil)
+    }
+    
     @objc private func didTapAvatar() {
         launchFirstAnimation()
         launchSecondAnimation()
@@ -189,20 +192,11 @@ class ProfileHeaderView: UIView {
         closingAnimation()
     }
     
-    @objc public func buttonPressed(_ sender: UIButton!) {
+    @objc public func buttonPressed(notification: NSNotification) {
         let statusNewText = statusTextField.text
         statusLabel.text = statusNewText
-        print(statusLabel.text!)
     }
 
-    private func setupActions() {
-        let tapRoot = UITapGestureRecognizer(
-            target: self,
-            action: #selector(buttonPressed)
-        )
-        setStatusButton.addGestureRecognizer(tapRoot)
-    }
-    
     private func launchFirstAnimation() {
         
         CATransaction.begin()

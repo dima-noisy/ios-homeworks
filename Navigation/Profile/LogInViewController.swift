@@ -4,7 +4,7 @@ protocol LoginViewControllerDelegate {
     mutating func check(usersLogin: String, usersPassword: String) -> Bool
 }
 
-class LogInViewController: UIViewController {
+public class LogInViewController: UIViewController {
     
     var loginDelegate: LoginViewControllerDelegate?
     
@@ -112,41 +112,40 @@ class LogInViewController: UIViewController {
         return stackView
     }()
     
-    private lazy var logInButton: UIButton = {
-        var button = UIButton()
+    public lazy var logInButton: CustomButton = {
+        var button = CustomButton(title: "Log In", titleColor: .white)
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        button.setTitle("Log In", for: .normal)
-        button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10.0
         button.clipsToBounds = true
         
         button.setBackgroundImage(UIImage(named: "bluePixel"), for: .normal)
         
-        button.addTarget(self, action: #selector(logInButtonPressed(_:)), for: .touchUpInside)
-            
-        
         return button
     }()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
         addSubviews()
         setupConstraints()
-        setupActions()
         changeButtonState()
+        //createObservers()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override public func viewDidAppear(_ animated: Bool) {
+        createObservers()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
         setupKeyboardObservers()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -209,14 +208,17 @@ class LogInViewController: UIViewController {
         ])
     }
     
-    @objc public func logInButtonPressed(_ sender: UIButton!) {
+    func createObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(logInButtonPressed(notification:)), name: Notification.Name("LoginButtonCalling"), object: nil)
+    }
+    
+    @objc public func logInButtonPressed(notification: NSNotification) {
     #if DEBUG
         let service = CurrentUserService(user: ProfileViewController().catUser)
     #else
         let service = TestUserService(user: ProfileViewController().catUser)
     #endif
         if (loginDelegate?.check(usersLogin: textField1.text ?? "", usersPassword: textField2.text ?? ""))! {
-            //if service.userAutorization(usersLogin: textField1.text ?? "") != nil {
             let profileViewController = ProfileViewController()
             navigationController?.pushViewController(profileViewController, animated: true)
         } else {
@@ -226,15 +228,7 @@ class LogInViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    private func setupActions() {
-        let tapRoot = UITapGestureRecognizer(
-            target: self,
-            action: #selector(logInButtonPressed)
-        )
-        logInButton.addGestureRecognizer(tapRoot)
-    }
-    
+
     private func changeButtonState() {
         switch logInButton.state {
         case .normal:
@@ -272,12 +266,11 @@ class LogInViewController: UIViewController {
         let notificationCenter = NotificationCenter.default
         notificationCenter.removeObserver(self)
     }
-    
 }
 
 extension LogInViewController: UITextFieldDelegate {
     
-    func textFieldShouldReturn(
+    public func textFieldShouldReturn(
         _ textField: UITextField
     ) -> Bool {
         textField.resignFirstResponder()
