@@ -28,10 +28,12 @@
 		646ADD0F2B5DCF3E00A9BEBD /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADD0E2B5DCF3E00A9BEBD /* FeedViewController.swift */; };
 		646ADD132B5EE2FC00A9BEBD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADD122B5EE2FC00A9BEBD /* PostViewController.swift */; };
 		646ADD152B5F149C00A9BEBD /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADD142B5F149C00A9BEBD /* InfoViewController.swift */; };
+		647832942BF9211B00117C3E /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647832932BF9211B00117C3E /* FeedModel.swift */; };
 		64A507E52BC15A780009F457 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A507E42BC15A780009F457 /* TestUserService.swift */; };
 		64A507E72BCF8A9D0009F457 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A507E62BCF8A9D0009F457 /* Checker.swift */; };
 		64A507E92BD3B97E0009F457 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A507E82BD3B97E0009F457 /* LoginFactory.swift */; };
 		64A507ED2BD99DA30009F457 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 64A507EC2BD99DA30009F457 /* iOSIntPackage */; };
+		64E2187D2BF3F79E006D3636 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E2187C2BF3F79E006D3636 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,9 +83,11 @@
 		646ADD0E2B5DCF3E00A9BEBD /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		646ADD122B5EE2FC00A9BEBD /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		646ADD142B5F149C00A9BEBD /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		647832932BF9211B00117C3E /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		64A507E42BC15A780009F457 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		64A507E62BCF8A9D0009F457 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		64A507E82BD3B97E0009F457 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		64E2187C2BF3F79E006D3636 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +158,7 @@
 		646ADCF92B5D075000A9BEBD /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				647832922BF9124A00117C3E /* Model */,
 				646156392B66816E00E15E50 /* Profile */,
 				640A82632BC094520021FE40 /* User */,
 				646ADCFA2B5D075000A9BEBD /* AppDelegate.swift */,
@@ -167,6 +172,15 @@
 				646ADD142B5F149C00A9BEBD /* InfoViewController.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		647832922BF9124A00117C3E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				64E2187C2BF3F79E006D3636 /* CustomButton.swift */,
+				647832932BF9211B00117C3E /* FeedModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,11 +310,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				64A507E52BC15A780009F457 /* TestUserService.swift in Sources */,
+				64E2187D2BF3F79E006D3636 /* CustomButton.swift in Sources */,
 				646ADD132B5EE2FC00A9BEBD /* PostViewController.swift in Sources */,
 				646ADCFF2B5D075000A9BEBD /* ViewController.swift in Sources */,
 				642AA3AC2B79D96800700255 /* LogInViewController.swift in Sources */,
 				642AA3FA2B8A277B00700255 /* PhotosTableViewCell.swift in Sources */,
 				642AA3FE2B8DC9E300700255 /* PhotosCollectionViewCell.swift in Sources */,
+				647832942BF9211B00117C3E /* FeedModel.swift in Sources */,
 				646ADCFB2B5D075000A9BEBD /* AppDelegate.swift in Sources */,
 				640A82622BC093140021FE40 /* User.swift in Sources */,
 				64A507E72BCF8A9D0009F457 /* Checker.swift in Sources */,
