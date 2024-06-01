@@ -2,6 +2,8 @@ import UIKit
 
 class FeedViewController: UIViewController, UIWindowSceneDelegate {
     
+    private var viewModel: ButtonVMOutput
+    
     public lazy var resultLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -14,7 +16,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         return label
     }()
     
-    private lazy var passwordTextField: UITextField = { [unowned self] in
+    public lazy var passwordTextField: UITextField = { [unowned self] in
         let view = UITextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -74,6 +76,15 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         
         return stackView
     }()
+    
+    init(viewModel: ButtonVMOutput) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,7 +149,8 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
     
     @objc func checkPassword(notification: NSNotification) {
         let passwordToCheck = passwordTextField.text ?? ""
-        FeedModel().check(passwordToCheck)
+        //FeedModel().check(passwordToCheck)
+        viewModel.changeColor()
     }
     
     @objc func rightPassword(notification: NSNotification) {
