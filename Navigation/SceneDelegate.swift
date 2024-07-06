@@ -13,9 +13,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         
-        let service = FeedViewModel()
+        let model = FeedViewModel()
         
-        let feedViewController = FeedViewController(viewModel: service as ButtonVMOutput)
+        let feedViewController = FeedViewController(viewModel: model as ButtonVMOutput)
         let logInViewController = LogInViewController()
         //logInViewController.loginDelegate = LoginInspector() решение для Задачи 1
         logInViewController.loginDelegate = MyLoginFactory().makeLoginInspector() //решение для Задачи2

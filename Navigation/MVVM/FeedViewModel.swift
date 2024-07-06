@@ -2,26 +2,23 @@ import UIKit
 
 final class FeedViewModel: ButtonVMOutput {
     
+    var state: State = .start
+    
     var currentState: ((State) -> Void)?
     
-    var state: State = .start {
-        didSet {
-            print(state)
-            currentState?(state)
-        }
-    }
-    
-    func changeColor() {
+    func checkMyPassword() {
         
         if FeedModel().secretWord == FeedViewController(viewModel: FeedViewModel()).passwordTextField.text?.lowercased() {
             state = .right
-            NotificationCenter.default.post(name: Notification.Name("RightPassword"), object: nil)
+            currentState?(state)
+            print(state)
+            FeedViewController(viewModel: FeedViewModel()).resultLabel.backgroundColor = .systemGreen
         } else {
             state = .wrong
-            NotificationCenter.default.post(name: Notification.Name("WrongPassword"), object: nil)
+            currentState?(state)
+            print(state)
+            FeedViewController(viewModel: FeedViewModel()).resultLabel.backgroundColor = .systemRed
         }
         
     }
-    
-    
 }

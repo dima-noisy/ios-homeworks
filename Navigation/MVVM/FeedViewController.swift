@@ -2,7 +2,7 @@ import UIKit
 
 class FeedViewController: UIViewController, UIWindowSceneDelegate {
     
-    private var viewModel: ButtonVMOutput
+    var viewModel: ButtonVMOutput
     
     public lazy var resultLabel: UILabel = {
         let label = UILabel()
@@ -27,6 +27,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         view.textColor = .black
         view.placeholder = "   Enter your password..."
+        //view.text = "secret" действительно, если нет дефолтного значения, то всегда wrong, а если есть, то всегда right
         
         view.keyboardType = UIKeyboardType.default
         view.returnKeyType = UIReturnKeyType.done
@@ -45,21 +46,21 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         
         return button
     }()
-
+    
     private lazy var btn1: CustomButton = {
         let button = CustomButton(title: "", titleColor: .black)
         button.backgroundColor = .systemBlue
         
         return button
     }()
-        
+    
     private lazy var btn2: CustomButton = {
         let button = CustomButton(title: "", titleColor: .black)
         button.backgroundColor = .systemRed
         
         return button
     }()
-        
+    
     private lazy var stackView: UIStackView = { [unowned self] in
         let stackView = UIStackView()
         
@@ -70,7 +71,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 10.0
-            
+        
         stackView.addArrangedSubview(self.btn1)
         stackView.addArrangedSubview(self.btn2)
         
@@ -99,7 +100,6 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         
         setupConstraints()
         createObservers()
-        
     }
     
     private func setupConstraints() {
@@ -137,28 +137,11 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
     
     func createObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(buttonPressed(notification:)), name: Notification.Name("FeedStackCalling"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(checkPassword(notification:)), name: Notification.Name("CheckPasswordCalling"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(rightPassword(notification:)), name: Notification.Name("RightPassword"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(wrongPassword(notification:)), name: Notification.Name("WrongPassword"), object: nil)
     }
     
     @objc func buttonPressed(notification: NSNotification) {
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
-    }
-    
-    @objc func checkPassword(notification: NSNotification) {
-        let passwordToCheck = passwordTextField.text ?? ""
-        //FeedModel().check(passwordToCheck)
-        viewModel.changeColor()
-    }
-    
-    @objc func rightPassword(notification: NSNotification) {
-        resultLabel.backgroundColor = .systemGreen
-    }
-    
-    @objc func wrongPassword(notification: NSNotification) {
-        resultLabel.backgroundColor = .systemRed
     }
 }
 
