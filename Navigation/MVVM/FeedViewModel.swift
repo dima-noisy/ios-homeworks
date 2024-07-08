@@ -8,16 +8,14 @@ final class FeedViewModel: ButtonVMOutput {
     
     func checkMyPassword() {
         
-        if FeedModel().secretWord == FeedViewController(viewModel: FeedViewModel()).passwordTextField.text?.lowercased() {
+        let word = FeedViewController(viewModel: FeedViewModel()).passwordTextField.text?.lowercased()
+        
+        if FeedModel().secretWord == word {
             state = .right
-            currentState?(state)
-            print(state)
-            FeedViewController(viewModel: FeedViewModel()).resultLabel.backgroundColor = .systemGreen
+            currentState?(.right)
         } else {
             state = .wrong
-            currentState?(state)
-            print(state)
-            FeedViewController(viewModel: FeedViewModel()).resultLabel.backgroundColor = .systemRed
+            currentState?(.wrong)
         }
         
     }

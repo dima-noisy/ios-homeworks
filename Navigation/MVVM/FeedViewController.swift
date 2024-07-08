@@ -2,7 +2,7 @@ import UIKit
 
 class FeedViewController: UIViewController, UIWindowSceneDelegate {
     
-    var viewModel: ButtonVMOutput
+    public var viewModel: ButtonVMOutput = FeedViewModel()
     
     public lazy var resultLabel: UILabel = {
         let label = UILabel()
@@ -27,7 +27,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         view.textColor = .black
         view.placeholder = "   Enter your password..."
-        //view.text = "secret" действительно, если нет дефолтного значения, то всегда wrong, а если есть, то всегда right
+        view.text = "secret" //действительно, если нет дефолтного значения, то всегда wrong, а если есть, то всегда right
         
         view.keyboardType = UIKeyboardType.default
         view.returnKeyType = UIReturnKeyType.done
@@ -100,6 +100,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         
         setupConstraints()
         createObservers()
+        //bindViewModel()
     }
     
     private func setupConstraints() {
@@ -142,6 +143,17 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
     @objc func buttonPressed(notification: NSNotification) {
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
+    }
+    
+    func bindViewModel() {
+        viewModel.checkMyPassword()
+        if  viewModel.state == .right {
+            resultLabel.backgroundColor = .systemGreen
+            print(self.viewModel.state)
+        } else if  viewModel.state == .wrong {
+            resultLabel.backgroundColor = .systemRed
+            print(self.viewModel.state)
+        }
     }
 }
 

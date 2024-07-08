@@ -31,6 +31,7 @@ public class CustomButton: UIButton {
             NotificationCenter.default.post(name: Notification.Name("FeedStackCalling"), object: nil)
         } else if self.title == "Password" {
             FeedViewModel().checkMyPassword()
+            FeedViewController(viewModel: FeedViewModel()).bindViewModel()
         }
     }
     
