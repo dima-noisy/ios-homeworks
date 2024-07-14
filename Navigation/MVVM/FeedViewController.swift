@@ -149,10 +149,10 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         viewModel.checkMyPassword()
         if  viewModel.state == .right {
             resultLabel.backgroundColor = .systemGreen
-            print(self.viewModel.state)
+            //print(self.viewModel.state)
         } else if  viewModel.state == .wrong {
             resultLabel.backgroundColor = .systemRed
-            print(self.viewModel.state)
+            //print(self.viewModel.state)
         }
     }
 }
