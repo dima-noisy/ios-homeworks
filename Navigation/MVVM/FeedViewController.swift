@@ -27,7 +27,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         view.textColor = .black
         view.placeholder = "   Enter your password..."
-        view.text = "secret" //действительно, если нет дефолтного значения, то всегда wrong, а если есть, то всегда right
+        //view.text = "secret" //действительно, если нет дефолтного значения, то всегда wrong, а если есть, то всегда right
         
         view.keyboardType = UIKeyboardType.default
         view.returnKeyType = UIReturnKeyType.done
@@ -146,13 +146,12 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
     }
     
     func bindViewModel() {
-        viewModel.checkMyPassword()
         if  viewModel.state == .right {
             resultLabel.backgroundColor = .systemGreen
-            //print(self.viewModel.state)
+            print(self.viewModel.state)
         } else if  viewModel.state == .wrong {
             resultLabel.backgroundColor = .systemRed
-            //print(self.viewModel.state)
+            print(self.viewModel.state)
         }
     }
 }

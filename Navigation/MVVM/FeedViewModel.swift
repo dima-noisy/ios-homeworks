@@ -13,10 +13,20 @@ final class FeedViewModel: ButtonVMOutput {
         if FeedModel().secretWord == word {
             state = .right
             currentState?(.right)
+            currentState = { state in
+                return
+            }
+            print(state)
+            print(currentState)
         } else {
             state = .wrong
             currentState?(.wrong)
+            currentState = { state in
+                return
+            }
+            print(state)
+            print(currentState)
         }
+     }
         
-    }
 }
