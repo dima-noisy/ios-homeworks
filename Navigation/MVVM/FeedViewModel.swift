@@ -2,31 +2,32 @@ import UIKit
 
 final class FeedViewModel: ButtonVMOutput {
     
-    var state: State = .start
+    var statusColor: Dynamic<Any> = Dynamic(UIColor.white)
     
-    var currentState: ((State) -> Void)?
-    
-    func checkMyPassword() {
-        
-        let word = FeedViewController(viewModel: FeedViewModel()).passwordTextField.text?.lowercased()
-        
-        if FeedModel().secretWord == word {
-            state = .right
-            currentState?(.right)
-            currentState = { state in
-                return
-            }
-            print(state)
-            print(currentState)
+    func checkMyPassword(password: String) {
+        if password == FeedModel().secretWord {
+            statusColor.value = UIColor.systemGreen
         } else {
-            state = .wrong
-            currentState?(.wrong)
-            currentState = { state in
-                return
-            }
-            print(state)
-            print(currentState)
+            statusColor.value = UIColor.systemRed
         }
-     }
-        
+    }
+}
+
+class Dynamic<T> {
+    typealias Listener = (T) -> Void
+    private var listener: Listener?
+    
+    func bind(_ listener: Listener?) {
+        self.listener = listener
+    }
+    
+    var value: T {
+        didSet {
+            listener?(value)
+        }
+    }
+    
+    init(_ v: T) {
+        value = v
+    }
 }

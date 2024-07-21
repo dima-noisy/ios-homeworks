@@ -27,7 +27,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         view.textColor = .black
         view.placeholder = "   Enter your password..."
-        //view.text = "secret" //действительно, если нет дефолтного значения, то всегда wrong, а если есть, то всегда right
+        view.text = "secret"
         
         view.keyboardType = UIKeyboardType.default
         view.returnKeyType = UIReturnKeyType.done
@@ -37,8 +37,14 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         return view
     }()
     
-    private lazy var checkGuessButton: CustomButton = {
-        let button = CustomButton(title: "Password", titleColor: .white)
+    private lazy var checkGuessButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.setTitle("Password", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(bindViewModel), for: .touchUpInside)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .systemIndigo
@@ -100,7 +106,6 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         
         setupConstraints()
         createObservers()
-        //bindViewModel()
     }
     
     private func setupConstraints() {
@@ -145,14 +150,12 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         self.navigationController?.pushViewController(postViewController, animated: true)
     }
     
-    func bindViewModel() {
-        if  viewModel.state == .right {
-            resultLabel.backgroundColor = .systemGreen
-            print(self.viewModel.state)
-        } else if  viewModel.state == .wrong {
-            resultLabel.backgroundColor = .systemRed
-            print(self.viewModel.state)
-        }
+    @objc
+    private func bindViewModel() {
+        viewModel.statusColor.bind( { (statusColor) in
+            self.resultLabel.backgroundColor = statusColor as? UIColor
+        } )
+        viewModel.checkMyPassword(password: (passwordTextField.text?.lowercased() ?? ""))
     }
 }
 
