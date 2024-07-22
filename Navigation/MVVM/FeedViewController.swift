@@ -2,6 +2,8 @@ import UIKit
 
 class FeedViewController: UIViewController, UIWindowSceneDelegate {
     
+    public var viewModel: ButtonVMOutput = FeedViewModel()
+    
     public lazy var resultLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -14,7 +16,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         return label
     }()
     
-    private lazy var passwordTextField: UITextField = { [unowned self] in
+    public lazy var passwordTextField: UITextField = { [unowned self] in
         let view = UITextField()
         view.translatesAutoresizingMaskIntoConstraints = false
         
@@ -25,6 +27,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         view.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         view.textColor = .black
         view.placeholder = "   Enter your password..."
+        view.text = "secret"
         
         view.keyboardType = UIKeyboardType.default
         view.returnKeyType = UIReturnKeyType.done
@@ -34,8 +37,14 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         return view
     }()
     
-    private lazy var checkGuessButton: CustomButton = {
-        let button = CustomButton(title: "Password", titleColor: .white)
+    private lazy var checkGuessButton: UIButton = {
+        
+        let button = UIButton()
+        
+        button.setTitle("Password", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(bindViewModel), for: .touchUpInside)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         
         button.backgroundColor = .systemIndigo
@@ -43,21 +52,21 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         
         return button
     }()
-
+    
     private lazy var btn1: CustomButton = {
         let button = CustomButton(title: "", titleColor: .black)
         button.backgroundColor = .systemBlue
         
         return button
     }()
-        
+    
     private lazy var btn2: CustomButton = {
         let button = CustomButton(title: "", titleColor: .black)
         button.backgroundColor = .systemRed
         
         return button
     }()
-        
+    
     private lazy var stackView: UIStackView = { [unowned self] in
         let stackView = UIStackView()
         
@@ -68,12 +77,21 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         stackView.distribution = .fillEqually
         stackView.alignment = .fill
         stackView.spacing = 10.0
-            
+        
         stackView.addArrangedSubview(self.btn1)
         stackView.addArrangedSubview(self.btn2)
         
         return stackView
     }()
+    
+    init(viewModel: ButtonVMOutput) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +107,9 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         setupConstraints()
         createObservers()
         
+        viewModel.statusColor.bind( { (statusColor) in
+            self.resultLabel.backgroundColor = statusColor as? UIColor
+        } )
     }
     
     private func setupConstraints() {
@@ -126,9 +147,6 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
     
     func createObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(buttonPressed(notification:)), name: Notification.Name("FeedStackCalling"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(checkPassword(notification:)), name: Notification.Name("CheckPasswordCalling"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(rightPassword(notification:)), name: Notification.Name("RightPassword"), object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(wrongPassword(notification:)), name: Notification.Name("WrongPassword"), object: nil)
     }
     
     @objc func buttonPressed(notification: NSNotification) {
@@ -136,17 +154,9 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         self.navigationController?.pushViewController(postViewController, animated: true)
     }
     
-    @objc func checkPassword(notification: NSNotification) {
-        let passwordToCheck = passwordTextField.text ?? ""
-        FeedModel().check(passwordToCheck)
-    }
-    
-    @objc func rightPassword(notification: NSNotification) {
-        resultLabel.backgroundColor = .systemGreen
-    }
-    
-    @objc func wrongPassword(notification: NSNotification) {
-        resultLabel.backgroundColor = .systemRed
+    @objc
+    private func bindViewModel() {
+        viewModel.checkMyPassword(password: (passwordTextField.text?.lowercased() ?? ""))
     }
 }
 
