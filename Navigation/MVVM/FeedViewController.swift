@@ -106,6 +106,10 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
         
         setupConstraints()
         createObservers()
+        
+        viewModel.statusColor.bind( { (statusColor) in
+            self.resultLabel.backgroundColor = statusColor as? UIColor
+        } )
     }
     
     private func setupConstraints() {
@@ -152,9 +156,6 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
     
     @objc
     private func bindViewModel() {
-        viewModel.statusColor.bind( { (statusColor) in
-            self.resultLabel.backgroundColor = statusColor as? UIColor
-        } )
         viewModel.checkMyPassword(password: (passwordTextField.text?.lowercased() ?? ""))
     }
 }
