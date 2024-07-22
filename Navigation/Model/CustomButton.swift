@@ -29,9 +29,6 @@ public class CustomButton: UIButton {
             NotificationCenter.default.post(name: Notification.Name("LoginButtonCalling"), object: nil)
         } else if self.layer.backgroundColor == UIColor.systemBlue.cgColor || self.layer.backgroundColor == UIColor.systemRed.cgColor {
             NotificationCenter.default.post(name: Notification.Name("FeedStackCalling"), object: nil)
-        } else if self.title == "Password" {
-            NotificationCenter.default.post(name: Notification.Name("CheckPasswordCalling"), object: nil)
         }
     }
-    
 }
