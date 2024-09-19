@@ -155,7 +155,7 @@ extension ProfileViewController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            navigationController?.pushViewController(PhotosViewController(), animated: true)
+            //navigationController?.pushViewController(PhotosViewController(), animated: true)
         }
     }
 }

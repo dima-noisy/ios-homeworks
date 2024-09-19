@@ -1,3 +1,4 @@
+/*
 import UIKit
 import iOSIntPackage
 
@@ -150,3 +151,4 @@ extension PhotosViewController: ImageLibrarySubscriber {
         collectionView.reloadData()
     }
 }
+ */
