@@ -1,3 +1,5 @@
+
+
 import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
@@ -40,8 +42,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }
 }
 
-
 /*
+
 import UIKit
 
 class PhotosCollectionViewCell: UICollectionViewCell {
@@ -83,4 +85,5 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         photoView.image = photo
     }
 }
-*/
+
+ */

@@ -1,8 +1,11 @@
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
     fileprivate lazy var photos: [String] = (1...20).map { String("ph\($0)") }
+    
+    lazy var arrayOfPhotos: [UIImage] = photos.map({ UIImage(named: $0)! })
     
     private lazy var collectionView: UICollectionView = {
         
@@ -24,7 +27,10 @@ class PhotosViewController: UIViewController {
         
         setupCollectionView()
         setupLayouts()
+        //ImageProcessor().processImagesOnThread(sourceImages: arrayOfPhotos, filter: .noir, qos: .default) { arrayOfPhotos.applyFilterOnThread(sourceImages: <#T##[UIImage]#>, filter: <#T##ColorFilter#>, completion: <#T##([CGImage?]) -> Void#>) }
+
     }
+    
     
     private func setupCollectionView() {
         view.addSubview(collectionView)
@@ -47,7 +53,6 @@ class PhotosViewController: UIViewController {
     
     private enum LayoutConstant {
         static let spacing: CGFloat = 8.0
-        //static let itemHeight: CGFloat = 40.0
     }
     
     private enum CellReuseID: String {
@@ -127,21 +132,20 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGFloat {
         LayoutConstant.spacing
     }
-
 }
 
 
 /*
 import UIKit
-import iOSIntPackage
++import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
     fileprivate lazy var photos: [String] = (1...20).map { String("ph\($0)") }
     
-    lazy var arrayOfPhotos: [UIImage] = photos.map({ UIImage(named: $0)! })
+    +lazy var arrayOfPhotos: [UIImage] = photos.map({ UIImage(named: $0)! })
     
-    let myPublisherFacade = ImagePublisherFacade()
+    +let myPublisherFacade = ImagePublisherFacade()
     
     private lazy var collectionView: UICollectionView = {
         
