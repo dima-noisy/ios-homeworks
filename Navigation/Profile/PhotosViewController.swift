@@ -27,7 +27,10 @@ class PhotosViewController: UIViewController {
         
         setupCollectionView()
         setupLayouts()
-        //ImageProcessor().processImagesOnThread(sourceImages: arrayOfPhotos, filter: .noir, qos: .default) { arrayOfPhotos.applyFilterOnThread(sourceImages: <#T##[UIImage]#>, filter: <#T##ColorFilter#>, completion: <#T##([CGImage?]) -> Void#>) }
+        
+        ImageProcessor().processImagesOnThread(sourceImages: arrayOfPhotos, filter: .colorInvert, qos: .default) {
+            arrayOfPhotos as! [CGImage?] = $0
+        }
 
     }
     
