@@ -27,11 +27,11 @@ class PhotosViewController: UIViewController {
         
         setupCollectionView()
         setupLayouts()
-        
+        /*
         ImageProcessor().processImagesOnThread(sourceImages: arrayOfPhotos, filter: .colorInvert, qos: .default) {
             arrayOfPhotos as! [CGImage?] = $0
         }
-
+         */
     }
     
     
