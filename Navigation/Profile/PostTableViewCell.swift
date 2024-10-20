@@ -1,5 +1,6 @@
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
     
@@ -56,7 +57,7 @@ class PostTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-
+        
         addSubviews()
         setupConstraints()
     }
@@ -79,6 +80,11 @@ class PostTableViewCell: UITableViewCell {
         textView.text = post.description
         likesView.text = "Likes: \(post.likes)"
         viewsView.text = "Views: \(post.views)"
+        
+        let imageProcessor = ImageProcessor()
+        imageProcessor.processImage(sourceImage: photoView.image!, filter: .noir) {
+            photoView.image = $0
+        }
     }
     
     private func addSubviews() {
@@ -115,4 +121,5 @@ class PostTableViewCell: UITableViewCell {
             viewsView.topAnchor.constraint(equalTo: likesView.topAnchor)
         ])
     }
+    
 }
