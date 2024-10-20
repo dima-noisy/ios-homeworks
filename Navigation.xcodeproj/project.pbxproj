@@ -18,7 +18,7 @@
 		642AA3FA2B8A277B00700255 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3F92B8A277B00700255 /* PhotosTableViewCell.swift */; };
 		642AA3FC2B8DB69200700255 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3FB2B8DB69200700255 /* PhotosViewController.swift */; };
 		642AA3FE2B8DC9E300700255 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3FD2B8DC9E300700255 /* PhotosCollectionViewCell.swift */; };
-		645E18C02C9EE15B00E3144A /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 645E18BF2C9EE15B00E3144A /* iOSIntPackage */; };
+        645319252C94C09100E72AD7 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645319242C94C09100E72AD7 /* LoginVM.swift */; };
 		6461563B2B6681DB00E15E50 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461563A2B6681DB00E15E50 /* ProfileHeaderView.swift */; };
 		6461563F2B66841E00E15E50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461563E2B66841E00E15E50 /* ProfileViewController.swift */; };
 		646ADCFB2B5D075000A9BEBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADCFA2B5D075000A9BEBD /* AppDelegate.swift */; };
