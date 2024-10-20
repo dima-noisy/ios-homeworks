@@ -314,7 +314,7 @@ class ProfileHeaderView: UIView {
     
     private func avatarFolderTimer() {
         
-        var counter = 7
+        var counter = 10
         
         timer = Timer.scheduledTimer(
             withTimeInterval: 1.0,
@@ -322,7 +322,7 @@ class ProfileHeaderView: UIView {
                 guard let self else { return }
                 counter -= 1
                 
-                print(counter <= 0 ? "End of Timer" : "\(counter)")
+                //print(counter <= 0 ? "End of Timer" : "\(counter)")
                 if counter <= 0 {
                     self.timer?.invalidate()
                     self.timer = nil
