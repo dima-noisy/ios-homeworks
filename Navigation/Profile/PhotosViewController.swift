@@ -7,8 +7,6 @@ class PhotosViewController: UIViewController {
     
     lazy var arrayOfPhotos: [UIImage] = photos.map({ UIImage(named: $0)! })
     
-    let myPublisherFacade = ImagePublisherFacade()
-    
     private lazy var collectionView: UICollectionView = {
         
         let viewLayout = UICollectionViewFlowLayout()
@@ -29,16 +27,8 @@ class PhotosViewController: UIViewController {
         
         setupCollectionView()
         setupLayouts()
-        
-        myPublisherFacade.subscribe(self)
-        myPublisherFacade.addImagesWithTimer(time: 1.5, repeat: arrayOfPhotos.count, userImages: arrayOfPhotos)
-        myPublisherFacade.rechargeImageLibrary()
-        
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        myPublisherFacade.removeSubscription(for: self)
-    }
     
     private func setupCollectionView() {
         view.addSubview(collectionView)
@@ -70,8 +60,7 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //photos.count
-        arrayOfPhotos.count
+        photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -79,8 +68,7 @@ extension PhotosViewController: UICollectionViewDataSource {
             withReuseIdentifier: CellReuseID.base.rawValue,
             for: indexPath) as! PhotosCollectionViewCell
         
-        //let photo = photos[indexPath.row]
-        let photo = arrayOfPhotos[indexPath.row]
+        let photo = photos[indexPath.row]
         cell.setup(with: photo)
         
         return cell
@@ -141,12 +129,5 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
         LayoutConstant.spacing
-    }
-}
-
-extension PhotosViewController: ImageLibrarySubscriber {
-    func receive(images: [UIImage]) {
-        arrayOfPhotos = images
-        collectionView.reloadData()
     }
 }

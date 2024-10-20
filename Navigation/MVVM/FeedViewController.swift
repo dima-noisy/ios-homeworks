@@ -157,6 +157,7 @@ class FeedViewController: UIViewController, UIWindowSceneDelegate {
     @objc
     private func bindViewModel() {
         viewModel.checkMyPassword(password: (passwordTextField.text?.lowercased() ?? ""))
+        view.endEditing(true)
     }
 }
 
