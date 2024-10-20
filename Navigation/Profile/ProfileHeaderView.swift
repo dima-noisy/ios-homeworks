@@ -2,6 +2,8 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
+    private var timer: Timer?
+    
     public lazy var avatarImageView: UIImageView = {
         let view = UIImageView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -173,6 +175,7 @@ class ProfileHeaderView: UIView {
     @objc private func didTapAvatar() {
         launchFirstAnimation()
         launchSecondAnimation()
+        avatarFolderTimer()
     }
     
     @objc private func didTapCloseAnimation() {
@@ -307,6 +310,26 @@ class ProfileHeaderView: UIView {
         
         CATransaction.commit()
          
+    }
+    
+    private func avatarFolderTimer() {
+        
+        var counter = 10
+        
+        timer = Timer.scheduledTimer(
+            withTimeInterval: 1.0,
+            repeats: true) { [weak self] timer in
+                guard let self else { return }
+                counter -= 1
+                
+                //print(counter <= 0 ? "End of Timer" : "\(counter)")
+                if counter <= 0 {
+                    self.timer?.invalidate()
+                    self.timer = nil
+                    print("Avatar has been Folded")
+                    closingAnimation()
+                }
+            }
     }
 
 }
