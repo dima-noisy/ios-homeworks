@@ -13,12 +13,13 @@
 		640F434B2BA38C4C00DB6B42 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 640F43452BA38C4C00DB6B42 /* StorageService.framework */; };
 		640F434C2BA38C4C00DB6B42 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 640F43452BA38C4C00DB6B42 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		640F43512BA38C6700DB6B42 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 640F433B2BA38BB200DB6B42 /* Post.swift */; };
+		641DDCE02CE9E063008E6FE7 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 645E18BF2C9EE15B00E3144A /* iOSIntPackage */; };
+		641DDCF52CE9E1D4008E6FE7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DDCF42CE9E1CD008E6FE7 /* NetworkManager.swift */; };
 		642AA3AC2B79D96800700255 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3AB2B79D96800700255 /* LogInViewController.swift */; };
 		642AA3D42B825EE700700255 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3D32B825EE700700255 /* PostTableViewCell.swift */; };
 		642AA3FA2B8A277B00700255 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3F92B8A277B00700255 /* PhotosTableViewCell.swift */; };
 		642AA3FC2B8DB69200700255 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3FB2B8DB69200700255 /* PhotosViewController.swift */; };
 		642AA3FE2B8DC9E300700255 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642AA3FD2B8DC9E300700255 /* PhotosCollectionViewCell.swift */; };
-        645319252C94C09100E72AD7 /* LoginVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 645319242C94C09100E72AD7 /* LoginVM.swift */; };
 		6461563B2B6681DB00E15E50 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461563A2B6681DB00E15E50 /* ProfileHeaderView.swift */; };
 		6461563F2B66841E00E15E50 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461563E2B66841E00E15E50 /* ProfileViewController.swift */; };
 		646ADCFB2B5D075000A9BEBD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 646ADCFA2B5D075000A9BEBD /* AppDelegate.swift */; };
@@ -69,6 +70,7 @@
 		640F43452BA38C4C00DB6B42 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		640F43472BA38C4C00DB6B42 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
 		640F434D2BA38C4C00DB6B42 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		641DDCF42CE9E1CD008E6FE7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		642AA3AB2B79D96800700255 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		642AA3D32B825EE700700255 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		642AA3F92B8A277B00700255 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -106,8 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				641DDCE02CE9E063008E6FE7 /* iOSIntPackage in Frameworks */,
 				640F434B2BA38C4C00DB6B42 /* StorageService.framework in Frameworks */,
-				645E18C02C9EE15B00E3144A /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +170,7 @@
 				640A82632BC094520021FE40 /* User */,
 				646ADCFA2B5D075000A9BEBD /* AppDelegate.swift */,
 				646ADCFC2B5D075000A9BEBD /* SceneDelegate.swift */,
+				641DDCF42CE9E1CD008E6FE7 /* NetworkManager.swift */,
 				646ADCFE2B5D075000A9BEBD /* ViewController.swift */,
 				646ADD032B5D075100A9BEBD /* Assets.xcassets */,
 				646ADD052B5D075100A9BEBD /* LaunchScreen.storyboard */,
@@ -323,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				641DDCF52CE9E1D4008E6FE7 /* NetworkManager.swift in Sources */,
 				64A507E52BC15A780009F457 /* TestUserService.swift in Sources */,
 				64E2187D2BF3F79E006D3636 /* CustomButton.swift in Sources */,
 				646ADD132B5EE2FC00A9BEBD /* PostViewController.swift in Sources */,

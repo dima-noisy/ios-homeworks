@@ -4,6 +4,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
+    let appConfiguration = AppConfiguration.allCases.randomElement()! //1й вариант инициализации
+    
     func scene(
         _ scene: UIScene,
         willConnectTo session: UISceneSession,
@@ -14,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         
         let model = FeedViewModel()
+        
+        //let appConfiguration = AppConfiguration.allCases.randomElement()! //2й вариант инициализации
         
         let feedViewController = FeedViewController(viewModel: model as ButtonVMOutput)
         let logInViewController = LogInViewController()
