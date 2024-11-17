@@ -15,6 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let model = FeedViewModel()
         
+        let appConfiguration = AppConfiguration.allCases.randomElement()!
+        print(appConfiguration)
+        
         let feedViewController = FeedViewController(viewModel: model as ButtonVMOutput)
         let logInViewController = LogInViewController()
         //logInViewController.loginDelegate = LoginInspector() решение для Задачи 1
