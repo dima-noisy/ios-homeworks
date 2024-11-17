@@ -17,7 +17,7 @@ enum AppConfiguration: CaseIterable {
 struct NetworkManager {
     
     static func request(for configuration: AppConfiguration) {
-        
+        let configuration = SceneDelegate().appConfiguration
     }
 }
 
